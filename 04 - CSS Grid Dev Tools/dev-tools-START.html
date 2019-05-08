@@ -23,8 +23,20 @@
   </div>
 
   <style>
+    /* guide to Firefox dev tools */
+    /* columns/rows = tracks */
+    /* tracks are not numbered by the actual column/row number itself
+    but by the lines that start and stop them */
+    /* will always have a line number one greater than the number of columns/rows */
+
+    /* solid lines - explicit grid edge */
+    /* dark dashed lines - explicit track */
+    /* light dotted lines - implicit track */
+    /* dashed diagonal lines - gap */
     .container {
       display: grid;
+      grid-gap: 20px;
+      grid-template-columns: 100px 200px;
     }
   </style>
 </body>
