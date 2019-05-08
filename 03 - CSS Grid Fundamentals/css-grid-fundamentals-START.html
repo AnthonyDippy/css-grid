@@ -8,8 +8,43 @@
   <title>CSS Grid Fundamentals!</title>
 </head>
 
-<body>
+<style>
+  /* take an element
+  dice it up into columns and rows (tracks)
+  take items and lay them out anywhere inside grid
+  no need for positioning (top, left, right, bottom, position, etc.)
+  concepts of implicit and explicit grid later */
 
+  /* delicate dance between a container
+  and all of its items (direct children) */
+
+  /* grid properties are specified on the container
+  and this affects the items' positioning */
+  .container {
+    /* grid declaration */
+    display: grid;
+    /* number of things specified by sizes */
+    /* different units allowed here */
+    grid-template-columns: 10rem auto 200px 50px;
+    grid-template-rows: 100px 50px 20rem;
+    /* space items apart with gap */
+    grid-gap: 20px;
+  }
+</style>
+
+<body>
+  <div class="container">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+    <div class="item">4</div>
+    <div class="item">5</div>
+    <div class="item">6</div>
+    <div class="item">7</div>
+    <div class="item">8</div>
+    <div class="item">9</div>
+    <div class="item">10</div>
+  </div>
 </body>
 
 </html>
