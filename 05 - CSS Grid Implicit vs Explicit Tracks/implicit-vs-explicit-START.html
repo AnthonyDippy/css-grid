@@ -14,11 +14,33 @@
     <div class="item">2</div>
     <div class="item">3</div>
     <div class="item">4</div>
+    <div class="item">5</div>
+    <div class="item">6</div>
+    <div class="item">7</div>
+    <div class="item">8</div>
   </div>
 
   <style>
+    /* explicit - tracks created clearly and in detail (template),
+    no room for confusion or doubt */
+    /* implicit - tracks created through implication,
+    not clearly expressed */
+
+    /* grid-template-x for explicitly created tracks */
+    /* grid-auto-x for implicitly created tracks (also extra items) */
+    /* both use a space separated track list */
+
+    /* by default - define columns and any extra elements turned into 
+    implicit rows */
+    /* grid-auto-flow to change this -> next video */
     .container {
       display: grid;
+      grid-gap: 20px;
+      grid-template-columns: 200px 400px;
+      grid-template-rows: 50px 100px;
+      grid-auto-rows: 500px 50px;
+      /* this line doesn't make sense with current auto-flow */
+      grid-auto-columns: 100px;
     }
   </style>
 </body>
