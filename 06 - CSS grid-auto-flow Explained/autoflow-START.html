@@ -12,12 +12,35 @@
   <div class="container">
     <div class="item">1</div>
     <div class="item">2</div>
+    <div class="item">3</div>
+    <div class="item">3</div>
+    <div class="item">3</div>
+    <div class="item">3</div>
+    <div class="item">3</div>
+    <div class="item">3</div>
+    <div class="item">3</div>
+    <div class="item">3</div>
+    <div class="item">3</div>
+    <div class="item">3</div>
+    <div class="item">3</div>
+    <div class="item">3</div>
+    <div class="item">3</div>
   </div>
 
   <style>
+    /* grid-auto-flow - controls how auto-placement algorithm works,
+    specifically how auto-placed items get flowed into the grid */
+    /* default is row - auto-places items into rows,
+    generating new rows as necessary */
+    /* also column */
+
+    /* also dense - fit items where there is space? */
     .container {
       display: grid;
       grid-gap: 20px;
+      grid-template-columns: 400px 200px;
+      grid-auto-flow: column;
+      grid-auto-columns: 100px;
     }
   </style>
 </body>
