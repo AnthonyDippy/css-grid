@@ -9,7 +9,6 @@
 </head>
 
 <body>
-
   <div class="overlay">
     <div class="overlay-inner">
       <button class="close">× Close</button>
@@ -47,13 +46,85 @@
 
     .close {
       background: none;
-      color: white;
+      color: black;
       border: 0;
     }
 
-    .gallery {}
+    .gallery {
+      display: grid;
+      /* use grid-auto-flow dense to fill spaces */
+      grid-auto-flow: dense;
+      grid-template-columns: repeat(auto-fill, 100px);
+      /* don't know how many rows there will be so size the implicit rows */
+      grid-auto-rows: 100px;
+    }
 
+    .item {
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1;
+      grid-template-rows: 1;
+    }
 
+    .item img {
+      grid-column: 1 / -1;
+      grid-row: 1 / -1;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* overlap items by placing them on the same column/row */
+    /* z-index / relative position comes into play  */
+    .item__overlay {
+      /* #rrggbbaa */
+      background: #ffc60032;
+      grid-column: 1 / -1;
+      grid-row: 1 / -1;
+      position: relative;
+      display: grid;
+      /* justify and align */
+      place-items: center;
+      transition: 0.2s;
+      transform: translateY(100%)
+    }
+
+    .item:hover .item__overlay {
+      transform: translateY(0%);
+    }
+
+    .item__overlay button {
+      background: none;
+      border: 2px solid white;
+      color: white;
+      text-transform: uppercase;
+      background: rgba(0, 0, 0, .5);
+      padding: 5px;
+    }
+
+    .item.v2 {
+      grid-row: span 2;
+    }
+
+    .item.v3 {
+      grid-row: span 3;
+    }
+
+    .item.v4 {
+      grid-row: span 4;
+    }
+
+    .item.h2 {
+      grid-column: span 2;
+    }
+
+    .item.h3 {
+      grid-column: span 3;
+    }
+
+    .item.h4 {
+      grid-column: span 4;
+    }
 
     .overlay {
       position: fixed;
@@ -68,9 +139,11 @@
 
     .overlay.open {
       display: grid;
+      align-items: center;
+      justify-items: center;
     }
 
-    .overlay figure {
+    .overlay-inner {
       background: white;
       width: 700px;
       padding: 20px;
@@ -82,6 +155,58 @@
   </style>
 
   <script>
+    // DOM elements
+    const gallery = document.querySelector('.gallery');
+    const overlay = document.querySelector('.overlay');
+    const overlayImage = overlay.querySelector('img');
+    const overlayClose = overlay.querySelector('.close');
+
+    // generate html for single picture
+    // also array destructuring
+    function generateHTML([h, v]) {
+      return `
+        <div class="item h${h} v${v}">
+          <img src="images/${randomNumber(12)}.jpg">
+          <div class="item__overlay">
+            <button>View ➡</button>
+          </div>
+        </div>
+      `;
+    }
+
+    // returns random number from 1 to limit (inclusive)
+    function randomNumber(limit) {
+      return Math.floor(Math.random() * limit) + 1;
+    }
+
+    // open overlay with image
+    function handleClick(e) {
+      const src = e.currentTarget.querySelector('img').src;
+      overlayImage.src = src;
+      overlay.classList.add('open');
+    }
+
+    // close overlay
+    function close() {
+      overlay.classList.remove('open');
+    }
+
+    // [[h, v], ...]
+    // concat extra [1, 1] to fill holes
+    const digits = Array.from({ length: 50 }, () => [randomNumber(4), randomNumber(4)]).concat([[1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1]]);
+    // create item html from digit array
+    const html = digits.map(generateHTML).join('');
+    // let html = ``;
+    // digits.forEach(pair => {
+    //   html += generateHTML(pair);
+    // });
+    gallery.innerHTML = html;
+
+    // attach click listeners for overlay buttons
+    // avoid event delegation here
+    const items = document.querySelectorAll('.item');
+    items.forEach(item => item.addEventListener('click', handleClick));
+    overlayClose.addEventListener('click', close);
   </script>
 </body>
 
