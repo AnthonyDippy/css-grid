@@ -43,11 +43,27 @@
   </div>
 
   <style>
+    /* name track lines by placing names in brackets between the tracks
+    when defining them in grid-template-xxx */
+    /* these names can then be used to reference the lines just as if
+    you were using the numbers */
+    /* you can assign multiple names to a single track line */
+
+    /* you define the names here as opposed to area-start and area-end 
+    for defined area names */
     .container {
       display: grid;
       grid-gap: 20px;
-      grid-template-columns: 1fr 500px 1fr;
-      grid-template-rows: repeat(10, auto);
+      grid-template-columns: [site-left other-name] 1fr [content-start] 500px [content-end] 1fr [site-right];
+      grid-template-rows: [content-top] repeat(10, auto) [content-bottom];
+    }
+
+    .item3 {
+      background: slateblue;
+      /* grid-column: 2;
+      grid-row: 1 / span 10; */
+      grid-column: content-start;
+      grid-row: content-top / content-bottom;
     }
   </style>
 </body>
