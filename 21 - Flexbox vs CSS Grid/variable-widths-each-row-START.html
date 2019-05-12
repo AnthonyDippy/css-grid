@@ -21,10 +21,19 @@
     <div class="item">Short</div>
   </div>
   <style>
-    .flex-container {}
+    /* flexbox is a better system here */
+    /* margin problems here because no flex gap */
+    .flex-container {
+      border: 1px solid black;
+      display: flex;
+      flex-wrap: wrap;
+      /* margin-right: -10px; */
+    }
 
     .flex-container>* {
       margin: 10px;
+      /* margin-right: 10px; */
+      flex: 1;
     }
   </style>
 </body>
