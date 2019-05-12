@@ -11,15 +11,41 @@
 
 <body>
 
-  <div class="grid">
+  <div class="grid" style="">
     <div class="item">1</div>
-    <div class="item">2</div>
-    <div class="item">3</div>
+    <div class="item" style="--span: 3;">Wesbos</div>
+    <div class="item span2">3</div>
     <div class="item">4</div>
   </div>
 
   <style>
-    .grid {}
+    /* rigid bootstrap grid */
+
+    /* minmax(0, 1fr) */
+    /* this makes items not take extra space for their content */
+
+    /* css variables or class names can be used for determining span */
+
+    /* var(--name, default) */
+    /* set vars in html style attribute */
+    /* --name: value; */
+    .grid {
+      display: grid;
+      grid-gap: 20px;
+      grid-template-columns: repeat(var(--cols, 12), minmax(0, 1fr));
+    }
+
+    .item {
+      /* not sure if this line is necessary */
+      /* min-width: 0; */
+      width: 100%;
+      --span: 1;
+      grid-column: span var(--span);
+    }
+
+    .span2 {
+      grid-column: span 2;
+    }
   </style>
 
 </body>
